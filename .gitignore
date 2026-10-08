@@ -1,0 +1,11 @@
+target/
+data/
+*.mv.db
+*.trace.db
+*.lock.db
+*.log
+runlog.txt
+runout.txt
+cookies.txt
+.idea/
+.vscode/

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bid Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Auction System</a>
+        <div class="ms-auto d-flex gap-2">
+            <a th:href="@{/customer/dashboard}" class="btn btn-outline-light btn-sm">Dashboard</a>
+            <a th:href="@{/logout}" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="mb-4">Enter Bid Details</h3>
+                    <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+                    <form th:action="@{/customer/bid/preview}" method="post">
+                        <input type="hidden" name="requestRef" th:value="${requestRef}">
+                        <div class="mb-3">
+                            <label class="form-label">Customer ID</label>
+                            <input type="text" name="customerId" class="form-control" th:value="${user.customerId}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Auction Item Reference</label>
+                            <input type="text" name="auctionItemRef" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Amount (Rupees)</label>
+                            <input type="number" name="amount" min="100" max="20000" step="1" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Validate &amp; Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

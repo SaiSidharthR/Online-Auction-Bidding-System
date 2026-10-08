@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Transaction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Auction System</a>
+        <div class="ms-auto d-flex gap-2">
+            <a th:href="@{/customer/dashboard}" class="btn btn-outline-light btn-sm">Dashboard</a>
+            <a th:href="@{/logout}" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="mb-4">Complete Payment</h3>
+                    <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+                    <div class="alert alert-info">
+                        Authorised amount: <strong th:text="'Rs.' + ${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 2, 'POINT')}"></strong><br>
+                        Service charge: <strong th:text="'Rs.' + ${#numbers.formatDecimal(transaction.charge, 0, 'COMMA', 2, 'POINT')}"></strong><br>
+                        Total debit: <strong th:text="'Rs.' + ${#numbers.formatDecimal(transaction.totalDebit, 0, 'COMMA', 2, 'POINT')}"></strong>
+                    </div>
+                    <form th:action="@{/customer/bid/complete}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Final PIN confirmation</label>
+                            <input type="password" name="pin" class="form-control" maxlength="4" pattern="\d{4}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Complete Transaction</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
